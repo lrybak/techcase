@@ -1,0 +1,11 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+.Python
+build/
+develop-eggs/
+eggs/
+.eggs/
+wheels/
+*.egg-info/
+*.egg
