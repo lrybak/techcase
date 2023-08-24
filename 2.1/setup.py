@@ -7,10 +7,9 @@ setup(
     version='0.0.1',
     packages=find_packages(),
     install_requires=[
-        "python-nmap",
-        "pydantic",
-        "click",
-        "humanize"
+        "python-nmap==0.7.1",
+        "pydantic==1.10.1",
+        "humanize==4.8.0"
     ],
     entry_points={
         'console_scripts': [
