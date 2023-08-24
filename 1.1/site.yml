@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install Docker packages.
+      become: yes
+      ansible.builtin.apt:
+        name: 
+          - docker.io
+          - rsyslog
+        state: present
+
+    - name: Adding user "{{ ansible_env.USER }}" to group docker
+      become: yes
+      ansible.builtin.user:
+        name: "{{ ansible_env.USER  }}"
+        groups: docker
+        append: yes
+    
+    - name: Configure Docker daemon
+      become: yes
+      ansible.builtin.template:
+        src: templates/daemon.json.j2
+        dest: /etc/docker/daemon.json
+        owner: root
+        group: root
+        mode: '0644'
+      notify: 
+        - restart docker
+
+  handlers:
+    - name: restart docker
+      become: yes
+      ansible.builtin.service:
+        name: docker
+        state: restarted
