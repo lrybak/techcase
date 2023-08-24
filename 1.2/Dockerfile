@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy app files
 COPY . /app
 
-# Install getweather app as pip packaged app
+# Install getweather app as python package
 RUN pip install --no-cache-dir /app/
 RUN rm -rf /app
 

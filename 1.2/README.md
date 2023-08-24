@@ -1,4 +1,4 @@
-# Excercise 1.2
+# Exercise 1.2
 ## Install
 ```
 make install
