@@ -6,7 +6,6 @@ from datetime import datetime
 import nmap
 import sys
 import os
-import pickle
 
 from scanner.models import Scan, Host, Port, PortScan
 
@@ -40,7 +39,7 @@ def is_running_in_kubernetes():
 
 def get_pickle_path():
     """Returns path to pickle file"""
-    pickle_file_name = '.scanner-cache.pkl'
+    pickle_file_name = '.scanner-cache.json'
     if is_running_in_kubernetes():
         return os.path.join('/mnt/scanner', pickle_file_name)
     else:
@@ -53,16 +52,20 @@ def load_cache():
     If no file found, new object is returned
     """
     try:
-        with open(get_pickle_path(), 'rb') as f:
-            return pickle.load(f)
+        with open(get_pickle_path(), 'r') as f:
+            scan_json = f.read()
+            if scan_json:
+                return Scan.parse_raw(scan_json)
+            else:
+              return Scan()
     except FileNotFoundError:
         return Scan()
 
 
 def save_scan(obj):
     """Function that serialize scan object """
-    with open(get_pickle_path(), 'wb') as f:
-        pickle.dump(obj, f)
+    with open(get_pickle_path(), 'w') as f:
+        f.write(obj.json())
 
 
 def main():
