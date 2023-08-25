@@ -27,7 +27,7 @@ def scan_network(hosts):
         scanner.scan(hosts=hosts, arguments='-T4 -F')
     except nmap.PortScannerError as error:
         print(f"Error during scanning: {error}")
-        return None
+        sys.exit(1)
 
     return scanner
 
