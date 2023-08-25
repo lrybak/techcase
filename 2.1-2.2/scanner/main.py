@@ -9,8 +9,6 @@ import os
 
 from scanner.models import Scan, Host, Port, PortScan
 
-MAX_SCANS = 2
-
 
 def scan_network(hosts):
     """
