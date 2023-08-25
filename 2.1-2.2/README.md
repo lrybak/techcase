@@ -16,6 +16,11 @@ Uninstall package if no longer required
 make uninstall
 ```
 
+## Cleanup
+```
+make clean
+```
+
 ## Usage
 Note: Program requires nmap to be locally installed. Nmap will be installed by running the playbook site.yml from task 1.1.
 Additionally, the program accepts the -v flag, providing verbose output related to the program's runtime statistics.
@@ -25,11 +30,27 @@ scanner 192.168.1.1/24
 scanner 192.168.1.1-30
 scanner 192.168.1.4 -v
 ```
+Example output:
+```
+$ scanner 192.168.1.10,170 -v
+192.168.1.10
+* 22/tcp ssh: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+* 111/tcp rpcbind: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+* 139/tcp netbios-ssn: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+* 445/tcp microsoft-ds: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+* 3000/tcp ppp: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+* 3306/tcp mysql: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+* 8000/tcp http-alt: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+* 8080/tcp http-proxy: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
 
-## Cleanup
+192.168.1.170
+* 22/tcp ssh: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+* 80/tcp http: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+* 443/tcp https: open (now), open (36 seconds ago), open (45 seconds ago), open (48 seconds ago)
+
+2 IP address in range (2 hosts up, 0 hosts down) scanned in 0.11 seconds
 ```
-make clean
-```
+
 
 # Exercise 2.2
 ## Build image
