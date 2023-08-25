@@ -1,10 +1,17 @@
 # Exercise 1.2
 ## Install
+
 ```
 make install
 ```
 
+After executing **make install** make sure to relogin to refresh $PATH envvar or manually update $PATH
+```
+export PATH=$HOME/.local/bin:$PATH
+```
+
 ## Uninstall
+Uninstall package if no longer required
 ```
 make uninstall
 ```
@@ -25,10 +32,10 @@ OWM_API_KEY='your_api_key' OWM_CITY='London' TEMP_UNIT=celsius getweather
 make clean
 ```
 
-# Exsercise 1.2
+# Exercise 1.3
 
 ## Build image
-
+Run below command to build docker image 
 ```
 docker build . --no-cache -t getweather:dev
 ```
@@ -36,5 +43,5 @@ docker build . --no-cache -t getweather:dev
 ## Run container
 
 ```
-docker run --rm -e OWM_API_KEY="xxxx" -e OWM_CITY="Kraków,PL" getweather:dev
+docker run --rm -e OWM_API_KEY="your_api_key" -e OWM_CITY="Kraków,PL" getweather:dev
 ```
