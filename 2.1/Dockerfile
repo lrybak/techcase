@@ -21,11 +21,14 @@ WORKDIR ${WORKDIR}
 # Copy app files
 COPY . ${WORKDIR}
 
-# Install getweather app as python package
+# Install scanner app as python package
+# Install dependencied
+RUN apt update
+RUN apt install nmap -y
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir ${WORKDIR}
 
 USER ${USER}
 
 # Run application
-CMD ["getweather"]
+ENTRYPOINT ["scanner"]
