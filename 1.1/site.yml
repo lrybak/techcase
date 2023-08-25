@@ -1,12 +1,12 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Install Docker packages.
+    - name: Install Docker packages
       become: yes
       ansible.builtin.apt:
         name: 
-          - docker.io
-          - rsyslog
+          - docker.io=20.10.25-0ubuntu1~22.04.2
+          - rsyslog=8.2112.0-2ubuntu2.2
         state: present
 
     - name: Adding user "{{ ansible_env.USER }}" to group docker
@@ -25,6 +25,7 @@
         group: root
         mode: '0644'
       notify: 
+        - restart rsyslog
         - restart docker
 
   handlers:
@@ -32,4 +33,10 @@
       become: yes
       ansible.builtin.service:
         name: docker
+        state: restarted
+
+    - name: restart rsyslog
+      become: yes
+      ansible.builtin.service:
+        name: rsyslog
         state: restarted
