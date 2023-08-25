@@ -37,8 +37,8 @@ def is_running_in_kubernetes():
     return 'KUBERNETES_SERVICE_HOST' in os.environ and 'KUBERNETES_SERVICE_PORT' in os.environ
 
 
-def get_pickle_path():
-    """Returns path to pickle file"""
+def get_cache_path():
+    """Returns path to cache file"""
     pickle_file_name = '.scanner-cache.json'
     if is_running_in_kubernetes():
         return os.path.join('/mnt/scanner', pickle_file_name)
@@ -52,7 +52,7 @@ def load_cache():
     If no file found, new object is returned
     """
     try:
-        with open(get_pickle_path(), 'r') as f:
+        with open(get_cache_path(), 'r') as f:
             scan_json = f.read()
             if scan_json:
                 return Scan.parse_raw(scan_json)
@@ -64,7 +64,7 @@ def load_cache():
 
 def save_scan(obj):
     """Function that serialize scan object """
-    with open(get_pickle_path(), 'w') as f:
+    with open(get_cache_path(), 'w') as f:
         f.write(obj.json())
 
 
