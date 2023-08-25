@@ -9,10 +9,20 @@ spec:
     spec:
       template:
         spec:
+          initContainers:
+          - name: set-permissions
+            image: busybox
+            command: ["sh", "-c", "chown -R 1001:1001 /mnt/scanner && chmod -R 770 /mnt/scanner"]
+            volumeMounts:
+            - name: scanner-storage
+              mountPath: /mnt/scanner/
           containers:
           - name: scanner
             image: registry.hub.docker.com/lrybak/scanner:dev
             imagePullPolicy: IfNotPresent
+            securityContext:
+              runAsUser: 1001
+              runAsGroup: 1001
             args: 
             - "192.168.1.1/24" 
             volumeMounts:
