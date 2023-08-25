@@ -1,5 +1,5 @@
 # Exercise 1.1
-## Bootstrap VM
+## Bootstrap test VM
 Create test VM or use your own
 
 ```sh
@@ -8,7 +8,7 @@ multipass mount $HOME/code/techcase techcase:/home/ubuntu/techcase
 ```
 
 # Run
-Run ansible playbook
+Run ansible playbook inside test VM
 
 ```
 ansible-playbook -i localhost -c local site.yml
