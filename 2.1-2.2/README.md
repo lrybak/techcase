@@ -62,6 +62,7 @@ docker buildx build --platform linux/amd64,linux/arm64 --push --no-cache -t lryb
 
 ## Deploy scanner cronjob
 Note: Update path in scanner-storage volume definition to fit your setup
+You can modify the address used by scanner by specifying .spec.jobTemplate.spec.template.spec.containers[0].args
 ```
 kubectl apply -f scanner.yaml
 
