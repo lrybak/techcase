@@ -22,7 +22,7 @@ WORKDIR ${WORKDIR}
 COPY . ${WORKDIR}
 
 # Install scanner app as python package
-# Install dependencied
+# Install dependencies
 RUN apt update
 RUN apt install nmap -y
 RUN pip install --upgrade pip
